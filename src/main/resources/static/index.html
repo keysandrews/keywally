@@ -6,20 +6,60 @@
   <body>
     <div id="imageContainer">
       <img id="deck" src="images/back.png" class="game-cards">
-      <img id="image2" src="images/back.png" class="side-cards">
+      <!-- <img id="image2" src="images/back.png" class="side-cards">
       <img id="image3" src="images/back.png" class="side-cards">
       <img id="image4" src="images/back.png" class="side-cards">
       <img id="image5" src="images/back.png" class="side-cards">
       <img id="image6" src="images/back.png" class="side-cards">
-      <img id="image7" src="images/back.png" class="side-cards">
+      <img id="image7" src="images/back.png" class="side-cards"> -->
     </div>
 
-    <div id="imageContainerHorses">
+    <div class="grid-container">
+        <!-- Deck -->
+        <!-- <div id="deck" class="grid-item" style="grid-column: 1 / 2; grid-row: 2 / 3;">
+            <img id="ACECLUBS1" src="images/cards/ACE_of_CLUBS.png" class="horse-cards">
+        </div> -->
+        <!-- Side Cards -->
+        <div id="sidefirst" class="grid-item" style="grid-column: 2 / 3; grid-row: 1 / 2; ">
+            <img id="side1" src="images/back.png" class="side-cards">
+        </div>
+        <div id="sidetwo" class="grid-item" style="grid-column: 3 / 4; grid-row: 1 / 2;">
+            <img id="side2" src="images/back.png" class="side-cards">
+        </div>
+        <div id="sidethree" class="grid-item" style="grid-column: 4 / 5; grid-row: 1 / 2;">
+            <img id="side3" src="images/back.png" class="side-cards">
+        </div>
+        <div id="sidefour" class="grid-item" style="grid-column: 5 / 6; grid-row: 1 / 2;">
+            <img id="side4" src="images/back.png" class="side-cards">
+        </div>
+        <div id="sidefive" class="grid-item" style="grid-column: 6 / 7; grid-row: 1 / 2;">
+            <img id="side5" src="images/back.png" class="side-cards">
+        </div>
+        <div id="sidesix" class="grid-item" style="grid-column: 7 / 8; grid-row: 1 / 2;">
+            <img id="side6" src="images/back.png" class="side-cards">
+        </div>
+        <!-- Horses -->
+        <div id="ACECLUBS" class="grid-item" style="grid-column: 1 / 2; grid-row: 2 / 3;">
+            <img id="ACECLUBS1" src="images/cards/ACE_of_CLUBS.png" class="horse-cards">
+        </div>
+        <div id="ACEDIAMONDS" class="grid-item" style="grid-column: 1 / 2; grid-row: 3 / 4;">
+            <img id="ACEDIAMONDS1" src="images/cards/ACE_of_DIAMONDS.png" class="horse-cards">
+        </div>
+        <div id="ACEHEARTS" class="grid-item" style="grid-column: 1 / 2; grid-row: 4 / 5;">
+            <img id="ACEHEARTS1" src="images/cards/ACE_of_HEARTS.png" class="horse-cards">
+        </div>
+        <div id="ACESPADES" class="grid-item" style="grid-column: 1 / 2; grid-row: 5 / 6;">
+            <img id="ACESPADES1" src="images/cards/ACE_of_SPADES.png" class="horse-cards">
+        </div>
+      </div>
+      
+
+    <!-- <div id="imageContainerHorses">
         <img id="horseClubs" src="images/cards/ACE_of_CLUBS.png" class="horse-cards">
         <img id="horseDiamonds" src="images/cards/ACE_of_DIAMONDS.png" class="horse-cards">
         <img id="horseHearts" src="images/cards/ACE_of_HEARTS.png" class="horse-cards">
         <img id="horseSpades" src="images/cards/ACE_of_SPADES.png" class="horse-cards">
-    </div>
+    </div> -->
 
     <script>
         const image = document.getElementById("deck");
@@ -31,6 +71,23 @@
                 });
             });
         }
+
+        const task1 = (id) => {
+            return new Promise((resolve) => {
+                const gridItem = document.querySelector(id);
+                const styles = window.getComputedStyle(gridItem);
+                const gridColumn = styles.getPropertyValue('grid-column');
+                const gridRow = styles.getPropertyValue('grid-row');
+                var gridColumnStartLine = gridColumn.split(' / ')[0];
+                const gridColumnEndLine = gridColumn.split(' / ')[1];
+                let newStart = parseInt(gridColumnStartLine) + 1;
+                var newEnd = parseInt(gridColumnEndLine) + 1;
+                var newPos = `${newStart} / ${newEnd}`;
+                gridItem.style.gridColumn = `${newPos}`;
+                resolve();
+            });
+        }
+
         async function getDataFromAPI() {
             try {
                 const response = await fetch("/gameInstructions");
@@ -41,17 +98,25 @@
             }
         }
 
+        async function onImageClick(rank, suit, image) {
+            image.src = `images/cards/${rank}_of_${suit}.png`;
+            console.log("Image clicked");  
+        } 
+
         async function loop() {
             const data = await getDataFromAPI();
             console.log(typeof data);
             for(let i = 0; i < data.length; i++) {
                 let rank = data[i].card.rank;
                 let suit = data[i].card.suit;
+                let pos = data[i].position;
                 console.log(rank, suit)
                 if(rank != "ACE"){
-                    await task(image).then(() => onImageClick(rank,suit, image));
+                    await task(image).then(() => onImageClick(rank, suit, image));
                 } else {
-                    continue;
+                    let id = `#${rank}${suit}`;
+                    console.log(id);
+                    await task1(id);
                 }
                 
                 
@@ -59,19 +124,6 @@
         }
 
         loop();
-
-        async function onImageClick(rank, suit, image) {
-            image.src = `images/cards/${rank}_of_${suit}.png`;
-            console.log("Image clicked");  
-        } 
-
-        // async function main() {
-        //     await waitForClick(image).then(() => onImageClick(rank, suit,image)); 
-        //     console.log("Button was clicked");
-        // }
-
-
-
 
     </script>
 

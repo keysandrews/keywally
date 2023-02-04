@@ -28,8 +28,23 @@
 }
 
 .horse-cards {
-    display: block;
     height: 100px;
-    margin-top: 0 20px;
     transform: rotate(90deg);
+}
+
+.grid-container {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 5px;
+}
+
+.grid-item {
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  height: 100px;
+  width: 35px;
 }

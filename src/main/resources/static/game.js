@@ -1,9 +1,10 @@
 async function getInstructions() {
     const response = await fetch('/gameInstructions');
     const jsonData = await response.json();
-    console.log(jsonData);
+    const gameInstructions = Object.values(jsonData);
+    console.log(gameInstructions);
     
-    return jsonData;
+    return gameInstructions;
 }
 
 function game() {
