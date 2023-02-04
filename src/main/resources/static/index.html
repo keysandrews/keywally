@@ -48,7 +48,13 @@
                 let rank = data[i].card.rank;
                 let suit = data[i].card.suit;
                 console.log(rank, suit)
-                await task(image).then(() => onImageClick(rank,suit, image));
+                if(rank != "ACE"){
+                    await task(image).then(() => onImageClick(rank,suit, image));
+                } else {
+                    continue;
+                }
+                
+                
             }       
         }
 
