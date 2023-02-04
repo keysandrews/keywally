@@ -2,12 +2,15 @@ package com.horserace.service;
 
 import java.util.*;
 
+import org.springframework.stereotype.Service;
+
 import com.horserace.persistence.model.*;
 import com.horserace.persistence.model.enums.*;
 
-public class GameImpl {
+@Service
+public class GameImpl implements Game {
     
-    public ArrayList<GameSimEntity> instructions;
+    private ArrayList<GameSimEntity> instructions;
     private CardEntity topCard;
     private CardEntity tempHorse;
     private HorseEntity updateHorse; 
@@ -25,33 +28,28 @@ public class GameImpl {
         ArrayList<HorseEntity> horses = CardSetup.getHorses();
         //Use counter to count side deck
         int count = 0;
-                
+        //Keep Track of side deck Card;
+        CardEntity sideDeckCard;
+
+        //System.out.println("Playing Game");
         do {
-            //Get top card
-            topCard = deck.get(0);
-            //Remove from the deck
-            deck.remove(0);
-            //Add Flipped Card to Instruction
-            instructionStep = GameSimEntity.builder().action(Action.FLIP).type(Type.DECK).card(topCard).position(0).build();
-            instructions.add(instructionStep);
-            //Find Cooresponding Horse and update position
-            updateHorse = horses.stream().filter(x -> x.getSuit().equals(topCard.getSuit())).findFirst().get();
-            //Update Position
-            updateHorse.setPosition((updateHorse.getPosition() + 1)); 
-    
-            //COULD STOP GAME HERE WHEN WIN
-
-            //Create temp Horse to move corresponding Ace
-            tempHorse = new CardEntity(updateHorse.getSuit(), topCard.getRank());
+            //Flip Top Card
+            flipTopCard(deck);
+            //Find the Horse that cooresponds with suit of flipped card
+            tempHorse = findHorse(horses, topCard, 1);
+ 
             //Move Horse Instruction
-            instructionStep = GameSimEntity.builder().action(Action.MOVE).type(Type.ACE).card(tempHorse).position(updateHorse.getPosition()).build(); 
-            instructions.add(instructionStep); 
+            createInstructionStep(Action.MOVE, Type.ACE, tempHorse, updateHorse.getPosition());
 
+            //Check to trap condition is met
             int minPos = horses.stream().min(Comparator.comparingInt(HorseEntity::getPosition)).get().getPosition();
-
             if (minPos > count){
-                instructionStep = GameSimEntity.builder().action(Action.FLIP).type(Type.SIDE).card(sideDeck.get(count)).position(minPos).build(); 
-                instructions.add(instructionStep);
+                sideDeckCard = sideDeck.get(count);
+                //Flip side card
+                createInstructionStep(Action.FLIP, Type.SIDE, sideDeckCard, minPos);
+                //Move horse back
+                tempHorse = findHorse(horses, sideDeckCard, -1);
+                createInstructionStep(Action.MOVE, Type.ACE, tempHorse, updateHorse.getPosition());
                 count++;
             }
     
@@ -59,6 +57,32 @@ public class GameImpl {
 
         return instructions;
 
+    }
+
+    public void flipTopCard(ArrayList<CardEntity> deck){
+        //Get top card from the deck
+        topCard = deck.get(0);
+        //Remove from the deck
+        deck.remove(0);
+        //Add Flipped Card to Instruction
+        createInstructionStep(Action.FLIP, Type.DECK, topCard, 0);
+    }
+
+    //Create an instruction step and add it to the list
+    public void createInstructionStep(Action action, Type type, CardEntity card, int position){
+        instructionStep = GameSimEntity.builder().action(action).type(type).card(card).position(position).build(); 
+        instructions.add(instructionStep);
+    }
+
+    public CardEntity findHorse(ArrayList<HorseEntity> horses, CardEntity card, int pos){
+        //Find Cooresponding Horse and update position
+        updateHorse = horses.stream().filter(x -> x.getSuit().equals(card.getSuit())).findFirst().get();
+        //Update the position of the horse
+        updateHorse.setPosition((updateHorse.getPosition() + pos));
+        //Create temp Horse to move corresponding Ace
+        tempHorse = new CardEntity(card.getSuit(), Rank.ACE);
+
+        return tempHorse;
     }
 
 }

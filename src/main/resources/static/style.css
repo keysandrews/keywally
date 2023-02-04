@@ -1,0 +1,35 @@
+#imageContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 10;
+  left: 10;
+}
+
+#imageContainerHorses {
+  display: block;
+  justify-content: center;
+  position: absolute;
+  top: 100;
+  left: 10;
+  margin-top: 100px;
+  margin-left: 10px;
+}
+
+.game-cards {
+  height: 100px;
+  margin: 0 20px;
+}
+
+.side-cards {
+  height: 100px;
+  margin: 0 20px;
+  transform: rotate(90deg);
+}
+
+.horse-cards {
+    display: block;
+    height: 100px;
+    margin-top: 0 20px;
+    transform: rotate(90deg);
+}

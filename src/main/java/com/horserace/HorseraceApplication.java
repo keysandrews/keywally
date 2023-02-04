@@ -4,14 +4,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.horserace.service.*;
 import com.horserace.persistence.model.*;
+
 @SpringBootApplication
 public class HorseraceApplication {
 
 	public static void main(String[] args) {
-		GameImpl x = new GameImpl();
-		x.startGame();
-		for(GameSimEntity i : x.instructions){
-			System.out.print(i.toString());
+
+		Game game = new GameImpl();
+		
+		for(GameSimEntity i : game.startGame()){
+			System.out.println(i.getAction().toString() + " " + i.getType().toString() + " [" + i.getCard().getRank().toString() + ", " + i.getCard().getSuit().toString() + "] " + i.getPosition());
 		}
 		
 		SpringApplication.run(HorseraceApplication.class, args);

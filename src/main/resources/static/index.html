@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="imageContainer">
+      <img id="deck" src="images/back.png" class="game-cards">
+      <img id="image2" src="images/back.png" class="side-cards">
+      <img id="image3" src="images/back.png" class="side-cards">
+      <img id="image4" src="images/back.png" class="side-cards">
+      <img id="image5" src="images/back.png" class="side-cards">
+      <img id="image6" src="images/back.png" class="side-cards">
+      <img id="image7" src="images/back.png" class="side-cards">
+    </div>
+
+    <div id="imageContainerHorses">
+        <img id="horseClubs" src="images/cards/ACE_of_CLUBS.png" class="horse-cards">
+        <img id="horseDiamonds" src="images/cards/ACE_of_DIAMONDS.png" class="horse-cards">
+        <img id="horseHearts" src="images/cards/ACE_of_HEARTS.png" class="horse-cards">
+        <img id="horseSpades" src="images/cards/ACE_of_SPADES.png" class="horse-cards">
+    </div>
+
+    <script>
+        // async function fetchData() {
+        //     const response = await fetch('/gameInstructions');
+        //     const jsonData = await response.json();
+        //     console.log(jsonData);
+        //     return jsonData;
+        // }
+        fetch("/gameInstructions")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);  
+                data.forEach(function(item){
+                    console.log("Rank: ", item.card.rank, "Suit: ", item.card.suit);
+                });            
+ 
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+
+    // // fetchData().then(data => {
+    // //     const cardContainer = document.getElementById('card-container');
+    // //   for (const item of data) {
+    // //     const cardDiv = document.createElement('div');
+    // //     cardDiv.className = 'card';
+    // //     cardDiv.innerHTML = `<img src="images/cards/${item.card.rank}_of_${item.card.suit}.png">`;
+    // //     cardContainer.appendChild(cardDiv);
+    // //   }
+    // // });
+
+
+                   // for (const card of data) {
+                //     console.log(card.rank);
+                //     console.log(card.suit);
+                //     if(card.action == "FLIP" && card.type == "DECK"){
+                //         var image = document.getElementById("deck");
+                //         image.src = "images/cards/${card.rank}_of_${card.suit}.png";
+                //         setTimeout(function() {console.log("Wait to flip");}, 2000);
+                //     }
+                // }
+    </script>
+
+  </body>
+</html>
