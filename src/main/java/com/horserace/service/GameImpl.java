@@ -39,17 +39,17 @@ public class GameImpl implements Game {
             tempHorse = findHorse(horses, topCard, 1);
  
             //Move Horse Instruction
-            createInstructionStep(Action.MOVE, Type.ACE, tempHorse, updateHorse.getPosition());
+            createInstructionStep(Action.MOVE, Type.ACE, tempHorse, updateHorse.getPosition(), true);
 
             //Check to trap condition is met
             int minPos = horses.stream().min(Comparator.comparingInt(HorseEntity::getPosition)).get().getPosition();
             if (minPos > count){
                 sideDeckCard = sideDeck.get(count);
                 //Flip side card
-                createInstructionStep(Action.FLIP, Type.SIDE, sideDeckCard, minPos);
+                createInstructionStep(Action.FLIP, Type.SIDE, sideDeckCard, minPos, false);
                 //Move horse back
                 tempHorse = findHorse(horses, sideDeckCard, -1);
-                createInstructionStep(Action.MOVE, Type.ACE, tempHorse, updateHorse.getPosition());
+                createInstructionStep(Action.MOVE, Type.ACE, tempHorse, updateHorse.getPosition(), false);
                 count++;
             }
     
@@ -65,12 +65,12 @@ public class GameImpl implements Game {
         //Remove from the deck
         deck.remove(0);
         //Add Flipped Card to Instruction
-        createInstructionStep(Action.FLIP, Type.DECK, topCard, 0);
+        createInstructionStep(Action.FLIP, Type.DECK, topCard, 0, false);
     }
 
     //Create an instruction step and add it to the list
-    public void createInstructionStep(Action action, Type type, CardEntity card, int position){
-        instructionStep = GameSimEntity.builder().action(action).type(type).card(card).position(position).build(); 
+    public void createInstructionStep(Action action, Type type, CardEntity card, int position, boolean forward){
+        instructionStep = GameSimEntity.builder().action(action).type(type).card(card).position(position).forward(forward).build(); 
         instructions.add(instructionStep);
     }
 

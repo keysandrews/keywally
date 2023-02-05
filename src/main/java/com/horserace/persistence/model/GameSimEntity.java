@@ -20,5 +20,6 @@ public class GameSimEntity {
     private final Type type;
     private final CardEntity card;
     private final int position;
+    private final boolean forward;
     
 }

@@ -48,3 +48,16 @@
   height: 100px;
   width: 35px;
 }
+
+.header {
+  font-size: 36px;
+  font-weight: bold;
+  color: blue;
+}
+
+.background {
+  background-image: url('images/horseracetrack.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
