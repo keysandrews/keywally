@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>    
+  </head>
+  <body >
+    <h1 class="header">Horse Race</h1>
+    <body>
+        <div class="grid-container">
+            <div id="deckItem" style="grid-column: 1 / 2; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="deck" src="images/back.png" class="game-cards">
+            </div>
+            <!-- Side Cards -->
+            <div id="sidefirst" style="grid-column: 2 / 3; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="SIDE1" src="images/back.png" class="side-cards">
+            </div>
+            <div id="sidetwo" style="grid-column: 3 / 4; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="SIDE2" src="images/back.png" class="side-cards">
+            </div>
+            <div id="sidethree" style="grid-column: 4 / 5; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="SIDE3" src="images/back.png" class="side-cards">
+            </div>
+            <div id="sidefour" style="grid-column: 5 / 6; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="SIDE4" src="images/back.png" class="side-cards">
+            </div>
+            <div id="sidefive" style="grid-column: 6 / 7; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="SIDE5" src="images/back.png" class="side-cards">
+            </div>
+            <div id="sidesix" style="grid-column: 7 / 8; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                <img id="SIDE6" src="images/back.png" class="side-cards">
+            </div>
+            <!-- Horses -->
+            <div id="ACECLUBS" style="grid-column: 1 / 2; grid-row: 2 / 3; height: 100%; width: 100%; text-align: center;">
+                <img id="ACECLUBS1" src="images/cards/ACE_of_CLUBS.png" class="horse-cards">
+            </div>
+            <div id="ACEDIAMONDS" style="grid-column: 1 / 2; grid-row: 3 / 4; height: 100%; width: 100%; text-align: center;">
+                <img id="ACEDIAMONDS1" src="images/cards/ACE_of_DIAMONDS.png" class="horse-cards">
+            </div>
+            <div id="ACEHEARTS" style="grid-column: 1 / 2; grid-row: 4 / 5; height: 100%; width: 100%; text-align: center;">
+                <img id="ACEHEARTS1" src="images/cards/ACE_of_HEARTS.png" class="horse-cards">
+            </div>
+            <div id="ACESPADES" style="grid-column: 1 / 2; grid-row: 5 / 6; height: 100%; width: 100%; text-align: center;">
+                <img id="ACESPADES1" src="images/cards/ACE_of_SPADES.png" class="horse-cards">
+            </div>
+            <!-- Winner -->
+            <div id="sidesix" style="grid-column: 8 / 9; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
+                Winner
+            </div>
+          </div>
+      </body>
+
+      <script th:src="@{/js/game.js}"></script>
+
+  </body>
+</html>

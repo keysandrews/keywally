@@ -23,7 +23,6 @@
 
 .side-cards {
   height: 100px;
-  margin: 0 20px;
   transform: rotate(90deg);
 }
 
@@ -35,29 +34,15 @@
 .grid-container {
   display: grid;
   justify-content: center;
-  align-content: center;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-gap: 5px;
 }
 
-.grid-item {
-  text-align: center;
-  justify-content: center;
-  align-content: center;
-  height: 100px;
-  width: 35px;
-}
 
 .header {
   font-size: 36px;
   font-weight: bold;
-  color: blue;
+  color: rgb(14, 14, 230);
 }
 
-.background {
-  background-image: url('images/horseracetrack.jpeg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
