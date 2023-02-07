@@ -37,8 +37,8 @@ public class GameController {
       return mav;
     }
 
-    @PostMapping("/joinGame/{username}/{bet}")
-    public ResponseEntity<String> joinGame(@RequestParam("username") String name, @RequestParam("bet") int bet) {
+    @PostMapping("/joinGame")
+    public ResponseEntity<String> joinGame(@RequestParam String name, @RequestParam int bet) {
         System.out.println(name + " " + bet);
         PlayerEntity newPlayer = new PlayerEntity(name, bet);
         player.addPlayer(newPlayer);

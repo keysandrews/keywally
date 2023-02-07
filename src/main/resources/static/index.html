@@ -7,43 +7,18 @@
     <h1>Welcome to Page 1</h1>
     <p>Put QR code here and move player buttons to new html file</p>
     <form>
-        <form>
+        <form th:action="@{/joinGame}" method="PUT">
             <label for="username">Name:</label>
             <input type="text" id="username">
             
             <label for="bet">Bet:</label>
-            <input type="text" id="bet">
+            <input type="int" id="bet">
             
             <button type="submit">Submit</button>
           </form>
 
-    <a href="/game">Go to Page 2</a>
+
+    <a href="/game">game</a>
+
   </body>
-
-
-<script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-      event.preventDefault();
-    
-      var username = document.getElementById("username").value;
-      var bet = document.getElementById("bet").value;
-
-      console.log(username);
-      console.log(bet);
-      
-      fetch(`/joinGame/${username}/${bet}`, {
-            method: 'PUT'
-        })
-        .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-        })
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-    });
-</script>
-
-
 </html>
