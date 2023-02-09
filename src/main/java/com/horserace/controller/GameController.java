@@ -25,6 +25,7 @@ import com.horserace.persistence.model.enums.Suit;
 public class GameController {
     
     private Game game;
+    //Should use component
     private Player player = new PlayerImpl();
     private String name;
     private int bet;
@@ -59,7 +60,6 @@ public class GameController {
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             if(entry.getKey() == "username"){
                 name = entry.getValue().toString();
-                System.out.println(name);
             } else if (entry.getKey() == "bet"){
                 bet = Integer.parseInt(entry.getValue().toString());
                 System.out.println(bet);
