@@ -9,6 +9,14 @@
     <form id="myForm">
         <label for="username">Name:</label>
         <input type="text" name="username">
+
+        <label for="horse">Horse:</label>
+        <select id="list" name="list">
+            <option value="CLUBS">CLUBS</option>
+            <option value="SPADES">SPADES</option>
+            <option value="DIAMONDS">DIAMONDS</option>
+            <option value="HEARTS">HEARTS</option>
+          </select>
         
         <label for="bet">Bet:</label>
         <input type="number" name="bet">
@@ -36,43 +44,35 @@
         button.addEventListener("click", myFunction);
     </script>
 
-<script>
-    const form = document.getElementById("myForm");
-    
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-      
-      const formData = new FormData(form);
-      const data = {};
-      
-      for (const [key, value] of formData.entries()) {
-        if (key === "bet") {
-          data[key] = parseInt(value, 10);
-        } else {
-          data[key] = value;
+    <script>
+        const form = document.getElementById("myForm");
+        
+        form.addEventListener("submit", event => {
+        event.preventDefault();
+        
+        const formData = new FormData(form);
+        const data = {};
+        
+        for (const [key, value] of formData.entries()) {
+            if (key === "bet") {
+            data[key] = parseInt(value, 10);
+            } else {
+            data[key] = value;
+            }
+            console.log(data[key])
+            console.log(data[value])
         }
-        console.log(data[key])
-        console.log(data[value])
-      }
-      console.log(JSON.stringify(data))
+        console.log(JSON.stringify(data))
 
-      fetch("/joinGame", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-        // .then(response => response.json())
-        // .then(data => {
-        //   console.log("Success:", data);
-        // })
-        // .catch(error => {
-        //   console.error("Error:", error);
-        // });
-    });
-  </script>
+        fetch("/joinGame", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        });
+    </script>
   
-
   </body>
 </html>

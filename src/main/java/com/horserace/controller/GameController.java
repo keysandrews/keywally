@@ -19,6 +19,7 @@ import com.horserace.service.Game;
 import com.horserace.service.GameImpl;
 import com.horserace.service.Player;
 import com.horserace.service.PlayerImpl;
+import com.horserace.persistence.model.enums.Suit;
 
 @RestController
 public class GameController {
@@ -27,6 +28,7 @@ public class GameController {
     private Player player = new PlayerImpl();
     private String name;
     private int bet;
+    private Suit suit;
 
     @GetMapping("/gameInstructions")
     public ArrayList<GameSimEntity> getGameInstructions(){
@@ -58,12 +60,15 @@ public class GameController {
             if(entry.getKey() == "username"){
                 name = entry.getValue().toString();
                 System.out.println(name);
-            } else {
+            } else if (entry.getKey() == "bet"){
                 bet = Integer.parseInt(entry.getValue().toString());
                 System.out.println(bet);
+            } else{
+                suit = Suit.valueOf(entry.getValue().toString()); 
+                System.out.println(suit);
             }
         } 
-        PlayerEntity newPlayer = new PlayerEntity(name, bet);
+        PlayerEntity newPlayer = new PlayerEntity(name, bet, suit);
         System.out.println(newPlayer.getName()); 
         System.out.println(newPlayer.getBet()); 
         player.addPlayer(newPlayer);
