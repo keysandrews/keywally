@@ -5,7 +5,8 @@ import com.horserace.persistence.model.PlayerEntity;
 
 public class PlayerImpl implements Player {
 
-    private HashMap<Integer, PlayerEntity> players;
+    private HashMap<Integer, PlayerEntity> players = new HashMap<>();
+
     int index = 0;
 
     public HashMap<Integer, PlayerEntity> getPlayers(){
@@ -14,7 +15,7 @@ public class PlayerImpl implements Player {
     }
 
     public void addPlayer(PlayerEntity player){
-        if(players.isEmpty()){
+        if(players.isEmpty()) {
             players.put(index, player);
         } else {
             players.put(index++, player);

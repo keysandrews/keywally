@@ -6,19 +6,73 @@
   <body>
     <h1>Welcome to Page 1</h1>
     <p>Put QR code here and move player buttons to new html file</p>
-    <form>
-        <form th:action="@{/joinGame}" method="PUT">
-            <label for="username">Name:</label>
-            <input type="text" id="username">
-            
-            <label for="bet">Bet:</label>
-            <input type="int" id="bet">
-            
-            <button type="submit">Submit</button>
-          </form>
-
+    <form id="myForm">
+        <label for="username">Name:</label>
+        <input type="text" name="username">
+        
+        <label for="bet">Bet:</label>
+        <input type="number" name="bet">
+        
+        <button type="submit">Submit</button>
+    </form>
 
     <a href="/game">game</a>
+
+    <button id="myButton">Click me</button>
+
+    <script>
+        const button = document.getElementById("myButton");
+        
+        async function myFunction() {
+            try {
+                const response = await fetch("/getPlayers");
+                const data = await response.json();
+                console.log(data);
+                return data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        button.addEventListener("click", myFunction);
+    </script>
+
+<script>
+    const form = document.getElementById("myForm");
+    
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = {};
+      
+      for (const [key, value] of formData.entries()) {
+        if (key === "bet") {
+          data[key] = parseInt(value, 10);
+        } else {
+          data[key] = value;
+        }
+        console.log(data[key])
+        console.log(data[value])
+      }
+      console.log(JSON.stringify(data))
+
+      fetch("/joinGame", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        // .then(response => response.json())
+        // .then(data => {
+        //   console.log("Success:", data);
+        // })
+        // .catch(error => {
+        //   console.error("Error:", error);
+        // });
+    });
+  </script>
+  
 
   </body>
 </html>

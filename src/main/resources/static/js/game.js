@@ -45,6 +45,18 @@ async function getDataFromAPI() {
     }
 }
 
+async function getPlayerList() {
+    try {
+        const response = await fetch("/getPlayers");
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 async function onImageClick(rank, suit, image) {
     image.src = `images/cards/${rank}_of_${suit}.png`; 
 } 
