@@ -11,7 +11,7 @@
         <input type="text" name="username">
 
         <label for="horse">Horse:</label>
-        <select id="list" name="list">
+        <select id="horseId" name="list">
             <option value="CLUBS">CLUBS</option>
             <option value="SPADES">SPADES</option>
             <option value="DIAMONDS">DIAMONDS</option>
@@ -28,21 +28,9 @@
 
     <button id="myButton">Click me</button>
 
-    <script>
-        const button = document.getElementById("myButton");
-        
-        async function myFunction() {
-            try {
-                const response = await fetch("/getPlayers");
-                const data = await response.json();
-                console.log(data);
-                return data;
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        button.addEventListener("click", myFunction);
-    </script>
+    <div id="myDiv"> Hello</div>
+
+    <script src="/js/getPlayer.js" ></script>
 
     <script>
         const form = document.getElementById("myForm");

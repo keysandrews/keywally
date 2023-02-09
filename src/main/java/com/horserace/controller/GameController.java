@@ -46,14 +46,6 @@ public class GameController {
         return mav;
     }
 
-    // @PostMapping("/joinGame")
-    // public ResponseEntity<String> joinGame(@RequestParam("username") String name, @RequestParam("b") int bet) {
-    //     System.out.println(name + " " + bet);
-    //     PlayerEntity newPlayer = new PlayerEntity(name, bet);
-    //     player.addPlayer(newPlayer);
-    //     return ResponseEntity.ok("Data updated: " + name + " " + bet);
-    // }
-
     @PostMapping("/joinGame")
     public ResponseEntity<String> joinGame(@RequestBody Map<String, Object> data) {
         System.out.println(data);

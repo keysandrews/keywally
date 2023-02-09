@@ -45,25 +45,13 @@ async function getDataFromAPI() {
     }
 }
 
-async function getPlayerList() {
-    try {
-        const response = await fetch("/getPlayers");
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-
 async function onImageClick(rank, suit, image) {
     image.src = `images/cards/${rank}_of_${suit}.png`; 
 } 
 
 async function loop() {
     const data = await getDataFromAPI();
-    console.log(typeof data);
+    console.log(data);
     for(let i = 0; i < data.length; i++) {
         let rank = data[i].card.rank;
         let suit = data[i].card.suit;
@@ -92,10 +80,7 @@ async function loop() {
                 }, 500);
             } else {
                 await task1(id, 1);
-            }
-
-
-            
+            }        
         }
     }       
 }
