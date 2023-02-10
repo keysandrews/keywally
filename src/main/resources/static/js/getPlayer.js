@@ -35,4 +35,24 @@ async function updateList(){
     document.getElementById("myDiv").innerHTML = list;
 }
 
+
+async function getPlayer(){
+    fetch('/getPlayers')
+    .then(response => response.json())
+    .then(players => {
+      let heartsList = document.getElementById('HEARTS');
+      let clubsList = document.getElementById('CLUBS');
+      let diamondsList = document.getElementById('DIAMONDS');
+      let spadesList = document.getElementById('SPADES');
+
+      players.forEach(player => {
+        let item = document.createElement('li');
+
+        item.appendChild(document.createTextNode(player));
+
+        list.appendChild(item);
+      });
+    });
+}
+
 button.addEventListener("click", updateList);

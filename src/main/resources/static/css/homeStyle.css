@@ -25,6 +25,7 @@ body {
   height: 50%;
   display: flex;
   justify-content: space-between;
+  text-align: center;
 }
 
 .title {
@@ -44,6 +45,8 @@ body {
 .list {
   width: 23%;
   color: white;
+  text-align: center;
+  list-style-type: none;
 }
 
 .player-count {
@@ -77,4 +80,9 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+ }
+
+ .horses-images{
+    width: 75px;
+    height: 75px;
  }
