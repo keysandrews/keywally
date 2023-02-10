@@ -1,66 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Page 1</title>
-  </head>
-  <body>
-    <h1>Welcome to Page 1</h1>
-    <p>Put QR code here and move player buttons to new html file</p>
-    <form id="myForm">
-        <label for="username">Name:</label>
-        <input type="text" name="username">
-
-        <label for="horse">Horse:</label>
-        <select id="horseId" name="list">
-            <option value="CLUBS">CLUBS</option>
-            <option value="SPADES">SPADES</option>
-            <option value="DIAMONDS">DIAMONDS</option>
-            <option value="HEARTS">HEARTS</option>
-          </select>
-        
-        <label for="bet">Bet:</label>
-        <input type="number" name="bet">
-        
-        <button type="submit">Submit</button>
-    </form>
-
-    <a href="/game">game</a>
-
-    <button id="myButton">Click me</button>
-
-    <div id="myDiv"> Hello</div>
-
-    <script src="/js/getPlayer.js" ></script>
-
-    <script>
-        const form = document.getElementById("myForm");
-        
-        form.addEventListener("submit", event => {
-        event.preventDefault();
-        
-        const formData = new FormData(form);
-        const data = {};
-        
-        for (const [key, value] of formData.entries()) {
-            if (key === "bet") {
-            data[key] = parseInt(value, 10);
-            } else {
-            data[key] = value;
-            }
-            console.log(data[key])
-            console.log(data[value])
-        }
-        console.log(JSON.stringify(data))
-
-        fetch("/joinGame", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        });
-    </script>
-  
-  </body>
+    <head>
+        <link rel="stylesheet" href="/css/homeStyle.css"/>  
+     </head>
+     <body>
+        <div class="header">
+           <h1 class="title">Horse Race</h1>
+        </div>
+        <div class="image-section">
+            <p class="player-count">Number of players: 4</p>
+            <img class="image" src="images/QRcodeSample.png" alt="My Image">
+            <button class="start-game-button">Start Game</button>
+            <button class="fake-game-button"></button>
+        </div>
+        <div class="lists">
+           <ul class="list">
+              <li>List item 1</li>
+              <li>List item 2</li>
+              <li>List item 3</li>
+           </ul>
+           <ul class="list">
+              <li>List item 4</li>
+              <li>List item 5</li>
+              <li>List item 6</li>
+           </ul>
+           <ul class="list">
+              <li>List item 7</li>
+              <li>List item 8</li>
+              <li>List item 9</li>
+           </ul>
+           <ul class="list">
+              <li>List item 10</li>
+              <li>List item 11</li>
+              <li>List item 12</li>
+           </ul>
+        </div>
+     </body>
 </html>

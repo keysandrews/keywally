@@ -1,0 +1,80 @@
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+
+.header {
+  background-color: rgb(255, 231, 189);
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section {
+  background-color: rgb(63, 138, 140);
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lists {
+  background-color: rgb(12, 86, 121);
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  text-align: center;
+  font-family: Monaco, Monospace;
+  color: rgb(229, 52, 11);
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  width: 23%;
+  color: white;
+}
+
+.player-count {
+    font-size: 1.2em;
+    color: white;
+    margin-left: 10%;
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.start-game-button {
+    background-color: rgb(229, 52, 11);
+    color: white;
+    padding: 30px 50px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 25%;
+ 
+ }
+
+ .fake-game-button {
+    background-color: rgb(63, 138, 140);
+    color: white;
+    padding: 30px 50px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10%;
+    width: 5%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+ }
