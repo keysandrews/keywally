@@ -46,6 +46,14 @@ public class GameController {
         return mav;
     }
 
+    @GetMapping("/addPlayer")
+    public ModelAndView addPlayerPage() {
+        System.out.println("Add Player");
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("addPlayer");
+        return mav;
+    }
+
     @PostMapping("/joinGame")
     public ResponseEntity<String> joinGame(@RequestBody Map<String, Object> data) {
         System.out.println(data);

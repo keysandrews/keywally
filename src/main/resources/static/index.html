@@ -8,7 +8,12 @@
            <h1 class="title">Horse Race</h1>
         </div>
         <div class="image-section">
-            <p class="player-count">Number of players: 4</p>
+            <!-- Delete button-section later -->
+            <div class="button-section">
+                <button onclick="location.href='/addPlayer'">Add Player</button>
+                <button id="getPlayers">Get Players</button>
+            </div>
+            <p id="player-count" class="player-count">Number of players: 0</p>
             <img class="image" src="images/QRcodeSample.png" alt="My Image"> 
             <button onclick="location.href='/game'" class="start-game-button">Start Game</button>
             <button class="fake-game-button"></button>
@@ -17,28 +22,19 @@
             <!-- This calls /getPlayers and adds them to the list -->
            <ul id="HEARTS" class="list">
               <img class="horses-images" src="images/HEARTS.png" alt="My Image">
-              <li>List item 1</li>
-              <li>List item 2</li>
-              <li>List item 3</li>
            </ul>
            <ul id="CLUBS" class="list">
               <img class="horses-images" src="images/CLUBS.png" alt="My Image">
-              <li>List item 4</li>
-              <li>List item 5</li>
-              <li>List item 6</li>
            </ul>
            <ul id="DIAMONDS" class="list">
             <img class="horses-images" src="images/DIAMONDS.png" alt="My Image">
-              <li>List item 7</li>
-              <li>List item 8</li>
-              <li>List item 9</li>
            </ul>
            <ul id="SPADES" class="list">
             <img class="horses-images" src="images/SPADES.png" alt="My Image">
-              <li>List item 10</li>
-              <li>List item 11</li>
-              <li>List item 12</li>
            </ul>
         </div>
+
+        <script src="/js/getPlayer.js"></script>
+
      </body>
 </html>

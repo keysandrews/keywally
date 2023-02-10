@@ -1,4 +1,5 @@
 const button = document.getElementById("myButton");
+const newButton = document.getElementById("getPlayers");
 
 async function getPlayers() {
     try {
@@ -10,49 +11,33 @@ async function getPlayers() {
     }
 }
 
-async function addToList(){
-    const data = await getPlayers();
-    let values = [];
+async function getPlayer(){
+    var playerCount = 0;
+    const players = await getPlayers();
 
-    if (typeof data === 'object') {
-        values = Object.values(data);
+    let playersList = [];
+    if (typeof players === 'object') {
+        playersList = Object.values(players);
     } else {
-        values = [data];
+        playersList = [players];
     }
 
-    let html = "<ul>";
-    values.forEach(value => {
-        html += "<li>" + value.name +": " + value.bet +": "+ value.suit  + "</li>";
+    playerCount = playersList.length;
+    playersList.forEach(player => {
+        let listId = document.getElementById(player.suit);
+        let playerString = player.name + ": " + player.bet;
+        let item = document.createElement('li');  
+        item.appendChild(document.createTextNode(playerString));
+        listId.appendChild(item);
     });
-
-    html += "</ul>";
-    console.log(html)
-    return html;
+    return playerCount;
 }
 
-async function updateList(){
-    let list = await addToList();
-    document.getElementById("myDiv").innerHTML = list;
+async function getPlayerCount(){
+    var playerCount = await getPlayer();
+    const updatePlayerCount = document.getElementById("player-count");
+    updatePlayerCount.textContent = `Number of players: ${playerCount}`;
 }
 
-
-async function getPlayer(){
-    fetch('/getPlayers')
-    .then(response => response.json())
-    .then(players => {
-      let heartsList = document.getElementById('HEARTS');
-      let clubsList = document.getElementById('CLUBS');
-      let diamondsList = document.getElementById('DIAMONDS');
-      let spadesList = document.getElementById('SPADES');
-
-      players.forEach(player => {
-        let item = document.createElement('li');
-
-        item.appendChild(document.createTextNode(player));
-
-        list.appendChild(item);
-      });
-    });
-}
-
-button.addEventListener("click", updateList);
+newButton.addEventListener("click", getPlayerCount);
+// button.addEventListener("click", updateList);
