@@ -42,6 +42,14 @@ body {
   align-items: center;
 }
 
+.title-image {
+  width: 550px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .list {
   width: 23%;
   color: white;
