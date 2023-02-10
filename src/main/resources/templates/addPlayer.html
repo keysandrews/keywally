@@ -23,35 +23,7 @@
         <button type="submit">Submit</button>
     </form>
 
-    <script>
-        const form = document.getElementById("addPlayer");
-        
-        form.addEventListener("submit", event => {
-        event.preventDefault();
-        
-        const formData = new FormData(form);
-        const data = {};
-        
-        for (const [key, value] of formData.entries()) {
-            if (key === "bet") {
-            data[key] = parseInt(value, 10);
-            } else {
-            data[key] = value;
-            }
-            console.log(data[key])
-            console.log(data[value])
-        }
-        console.log(JSON.stringify(data))
-
-        fetch("/joinGame", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        });
-    </script>
+    <script th:src="@{/js/addPlayer.js}"></script>
   
   </body>
 </html>

@@ -39,5 +39,20 @@ async function getPlayerCount(){
     updatePlayerCount.textContent = `Number of players: ${playerCount}`;
 }
 
+let intervalId;
+
+const stopButton = document.getElementById("startGame");
+console.log(stopButton)
+stopButton.addEventListener("click", stop);
+
+// intervalId = setInterval(() => {
+//     console.log("hi")
+//     getPlayerCount();
+// }, 5000);
+
+function stop() {
+    clearInterval(intervalId);
+}
+
 newButton.addEventListener("click", getPlayerCount);
 // button.addEventListener("click", updateList);

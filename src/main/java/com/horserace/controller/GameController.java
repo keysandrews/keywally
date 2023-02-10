@@ -39,7 +39,7 @@ public class GameController {
     }
 
     @GetMapping("/game")
-    public ModelAndView myPage() {
+    public ModelAndView playGame() {
         System.out.println("Starting game");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("game");
