@@ -1,9 +1,7 @@
 package com.horserace.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -24,8 +22,6 @@ public class WebSocketController {
     @MessageMapping("/update/player")
     @SendTo("/topic/player")
     public PlayerEntity sendData(@RequestBody Map<String, Object> data) throws Exception {
-            
-            System.out.println(data);
             for (Map.Entry<String, Object> entry : data.entrySet()) {
                 if(entry.getKey() == "username"){
                     name = entry.getValue().toString();
@@ -38,8 +34,6 @@ public class WebSocketController {
                 }
             } 
             PlayerEntity newPlayer = new PlayerEntity(name, bet, suit);
-            System.out.println(newPlayer.getName()); 
-            System.out.println(newPlayer.getBet()); 
             //player.addPlayer(newPlayer);
             
             return newPlayer;
