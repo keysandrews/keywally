@@ -1,5 +1,6 @@
 const form = document.getElementById("addPlayer");
-  
+var stompClient = null;
+
 const postPlayerInfo = (playerInfo) => {
     return new Promise((resolve) => {
         fetch("/joinGame", {
@@ -29,8 +30,41 @@ form.addEventListener("submit", async event => {
         console.log(playerInfo[value])
     }
     console.log(JSON.stringify(playerInfo))
+    stompClient.send("/app/update/player", {}, JSON.stringify(playerInfo));
 
     await postPlayerInfo(playerInfo);
-    window.location = "/";
 });
 
+function setConnected(connected) {
+    $("#connect").prop("disabled", connected);
+    $("#disconnect").prop("disabled", !connected);
+    if (connected) {
+        $("#conversation").show();
+    }
+    else {
+        $("#conversation").hide();
+    }
+    $("#greetings").html("");
+}
+
+function connect() {
+    var socket = new SockJS('/gs-guide-websocket');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/player', function (player) {
+            console.log(JSON.stringify(player));
+        });
+    });
+}
+
+function disconnect() {
+    if (stompClient !== null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+connect();

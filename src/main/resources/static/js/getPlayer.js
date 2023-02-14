@@ -1,3 +1,5 @@
+let playersAddedToList = [];
+
 const button = document.getElementById("myButton");
 const newButton = document.getElementById("getPlayers");
 
@@ -24,11 +26,23 @@ async function getPlayer(){
 
     playerCount = playersList.length;
     playersList.forEach(player => {
-        let listId = document.getElementById(player.suit);
-        let playerString = player.name + ": " + player.bet;
-        let item = document.createElement('li');  
-        item.appendChild(document.createTextNode(playerString));
-        listId.appendChild(item);
+
+        const isInList = playersAddedToList.some(element => 
+            element.name === player.name && element.bet === player.bet && element.suit === player.suit
+        );
+        
+        if(isInList){
+            console.log("player is already in the list")
+        } else {
+            console.log("player is not in the list")
+            playersAddedToList.push(player);
+            let listId = document.getElementById(player.suit);
+            let playerString = player.name + ": " + player.bet;
+            let item = document.createElement('li');  
+            item.appendChild(document.createTextNode(playerString));
+            listId.appendChild(item);
+        }
+        console.log(playersAddedToList);
     });
     return playerCount;
 }
@@ -46,13 +60,14 @@ console.log(stopButton)
 stopButton.addEventListener("click", stop);
 
 // intervalId = setInterval(() => {
-//     console.log("hi")
+//     console.log(playersAddedToList)
 //     getPlayerCount();
 // }, 5000);
 
 function stop() {
     clearInterval(intervalId);
 }
+
 
 newButton.addEventListener("click", getPlayerCount);
 // button.addEventListener("click", updateList);

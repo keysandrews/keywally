@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" href="/css/homeStyle.css"/>  
+        <link rel="stylesheet" href="/css/homeStyle.css"/> 
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
      </head>
      <body>
         <div class="header">
@@ -34,7 +37,11 @@
            </ul>
         </div>
 
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script> -->
+
         <script src="/js/getPlayer.js"></script>
+        <script src="/js/displayPlayers.js"></script>
 
      </body>
 </html>
