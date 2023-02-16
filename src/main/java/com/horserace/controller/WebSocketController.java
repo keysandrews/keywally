@@ -22,11 +22,6 @@ public class WebSocketController {
     @Autowired
 	private PlayerImpl player;
 
-    // @Autowired
-    // public WebSocketController(PlayerImpl player){
-    //     this.player = player;
-    // }
-
     @MessageMapping("/update/player")
     @SendTo("/topic/player")
     public PlayerEntity sendData(@RequestBody Map<String, Object> data) throws Exception {
@@ -36,15 +31,12 @@ public class WebSocketController {
                 name = entry.getValue().toString();
             } else if (entry.getKey().equals("bet") ){
                 bet = Integer.parseInt(entry.getValue().toString());
-                System.out.println(bet);
             } else{
                 suit = Suit.valueOf(entry.getValue().toString()); 
-                System.out.println(suit);
             }
         } 
         PlayerEntity newPlayer = new PlayerEntity(name, bet, suit);
         player.addPlayer(newPlayer);
-        System.out.println("Player added");
         
         return newPlayer;
     }

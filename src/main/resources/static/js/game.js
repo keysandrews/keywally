@@ -47,7 +47,6 @@ async function onImageClick(rank, suit, image) {
 
 async function playGame() {
     const data = await getGameInstructions();
-    console.log(data);
     for(let i = 0; i < data.length; i++) {
         let rank = data[i].card.rank;
         let suit = data[i].card.suit;
@@ -69,7 +68,6 @@ async function playGame() {
         } else {
             let forward = data[i].forward;
             let id = `#${rank}${suit}`;
-            console.log(id);
             if (forward == false) {
                 setTimeout(function() {
                     moveHorse(id, -1);

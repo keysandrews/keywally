@@ -2,7 +2,6 @@ async function getPlayers() {
     try {
         const response = await fetch("/getPlayers");
         const data = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error(error);
@@ -22,7 +21,6 @@ async function getPlayer(){
 
     playerCount = playersList.length;
     playersList.forEach(player => {
-        console.log(player);
         let listId = document.getElementById(player.suit);
         let playerString = player.name + ": " + player.bet;
         let item = document.createElement('li');  
