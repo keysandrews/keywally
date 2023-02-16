@@ -25,13 +25,10 @@ public class PlayerImpl {
     }
 
     public synchronized void addPlayer(PlayerEntity player){
-        System.out.println("adding player");
         if(players.isEmpty()) {
-            System.out.println("adding player 1");
             System.out.println(player.getSuit());
             players.put(index, player);
         } else {
-            System.out.println("adding other players");
             System.out.println(player.getSuit());
             index++;
             players.put(index, player);

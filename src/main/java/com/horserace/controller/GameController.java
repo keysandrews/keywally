@@ -2,14 +2,10 @@ package com.horserace.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,25 +14,18 @@ import com.horserace.persistence.model.GameSimEntity;
 import com.horserace.persistence.model.PlayerEntity;
 
 import com.horserace.service.Game;
-import com.horserace.service.GameImpl;
-import com.horserace.service.Player;
 import com.horserace.service.PlayerImpl;
-import com.horserace.persistence.model.enums.Suit;
 
 @RestController
 public class GameController {
     @Autowired
 	private PlayerImpl player;
-    
-    private Game game;;
-    private String name;
-    private int bet;
-    private Suit suit;
+    @Autowired
+    private Game game;
 
     @GetMapping("/gameInstructions")
     public ArrayList<GameSimEntity> getGameInstructions(){
         System.out.println("Game Instructions");
-        game = new GameImpl();
         return game.startGame();
     }
 

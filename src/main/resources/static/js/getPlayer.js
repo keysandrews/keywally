@@ -1,8 +1,3 @@
-let playersAddedToList = [];
-
-const button = document.getElementById("myButton");
-const newButton = document.getElementById("getPlayers");
-
 async function getPlayers() {
     try {
         const response = await fetch("/getPlayers");

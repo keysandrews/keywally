@@ -1,6 +1,6 @@
 const image = document.getElementById("deck");
 
-const task = (image) => {
+const flipDeck = (image) => {
     return new Promise((resolve) => {
         image.addEventListener("click", () => {
             resolve();
@@ -8,34 +8,30 @@ const task = (image) => {
     });
 }
 
-const task1 = (id, mover) => {
+const moveHorse = (id, mover) => {
     return new Promise((resolve) => {
-        console.log(id);
-        console.log(mover);
         const gridItem = document.querySelector(id);
         const styles = window.getComputedStyle(gridItem);
         const gridColumn = styles.getPropertyValue('grid-column');
-        console.log("Old position: "+ gridColumn)
         var gridColumnStartLine = gridColumn.split(' / ')[0];
         const gridColumnEndLine = gridColumn.split(' / ')[1];
         let newStart = parseInt(gridColumnStartLine) + mover;
         var newEnd = parseInt(gridColumnEndLine) + mover;
         var newPos = `${newStart} / ${newEnd}`;
         gridItem.style.gridColumn = `${newPos}`;
-        console.log("New Posistion: "+ newPos);
         resolve();
     });
 }
 
 //Flip side deck
-const task3 = (image, rank, suit) => {
+const flipSideDeck = (image, rank, suit) => {
     return new Promise((resolve) => {
         image.src = `images/cards/${rank}_of_${suit}.png`; 
         resolve();
     });
 }
 
-async function getDataFromAPI() {
+async function getGameInstructions() {
     try {
         const response = await fetch("/gameInstructions");
         const data = await response.json();
@@ -49,8 +45,8 @@ async function onImageClick(rank, suit, image) {
     image.src = `images/cards/${rank}_of_${suit}.png`; 
 } 
 
-async function loop() {
-    const data = await getDataFromAPI();
+async function playGame() {
+    const data = await getGameInstructions();
     console.log(data);
     for(let i = 0; i < data.length; i++) {
         let rank = data[i].card.rank;
@@ -60,12 +56,12 @@ async function loop() {
         let action = data[i].action;      
         if(action == "FLIP"){
             if(type == "DECK") {
-                await task(image).then(() => onImageClick(rank, suit, image));
+                await flipDeck(image).then(() => onImageClick(rank, suit, image));
             } else {
                 const image = document.getElementById((type + pos));
                 mover = -1;
                 let id = `#ACE${suit}`;      
-                await task3(image, rank, suit);
+                await flipSideDeck(image, rank, suit);
                 setTimeout(function() {
 
                 }, 1000);
@@ -76,13 +72,13 @@ async function loop() {
             console.log(id);
             if (forward == false) {
                 setTimeout(function() {
-                    task1(id, -1);
+                    moveHorse(id, -1);
                 }, 500);
             } else {
-                await task1(id, 1);
+                await moveHorse(id, 1);
             }        
         }
     }       
 }
 
-loop();
+playGame();

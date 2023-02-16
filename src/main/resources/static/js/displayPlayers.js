@@ -1,21 +1,3 @@
-const newButton = document.getElementById("getPlayers");
-
-async function getPlayers() {
-    try {
-        const response = await fetch("/getPlayers");
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-newButton.addEventListener("click", getPlayers);
-
-///////////////////
-
-
 var socket = new SockJS('/gs-guide-websocket');
 var stompClient = Stomp.over(socket);
 var playerCount = 0;
