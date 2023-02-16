@@ -2,16 +2,22 @@ package com.horserace.service;
 
 import java.util.HashMap;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.horserace.persistence.model.PlayerEntity;
 
 @Component
+@Scope("singleton")
 public class PlayerImpl {
 
     private HashMap<Integer, PlayerEntity> players = new HashMap<>();
 
     int index = 0;
+
+    public PlayerImpl() {
+        System.out.println("creating PlayerImpl instance");
+    }
 
     public HashMap<Integer, PlayerEntity> getPlayers(){
         return players;
@@ -19,10 +25,16 @@ public class PlayerImpl {
     }
 
     public synchronized void addPlayer(PlayerEntity player){
+        System.out.println("adding player");
         if(players.isEmpty()) {
+            System.out.println("adding player 1");
+            System.out.println(player.getSuit());
             players.put(index, player);
         } else {
-            players.put(index++, player);
+            System.out.println("adding other players");
+            System.out.println(player.getSuit());
+            index++;
+            players.put(index, player);
         }
     }
 

@@ -33,11 +33,6 @@ public class GameController {
     private int bet;
     private Suit suit;
 
-    // @Autowired
-    // public GameController(PlayerImpl player) {
-    //     this.player = player;
-    // }
-
     @GetMapping("/gameInstructions")
     public ArrayList<GameSimEntity> getGameInstructions(){
         System.out.println("Game Instructions");

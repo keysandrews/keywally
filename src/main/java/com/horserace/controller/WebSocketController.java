@@ -30,6 +30,7 @@ public class WebSocketController {
     @MessageMapping("/update/player")
     @SendTo("/topic/player")
     public PlayerEntity sendData(@RequestBody Map<String, Object> data) throws Exception {
+        System.out.println("send Data");
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             if(entry.getKey().equals("username")){
                 name = entry.getValue().toString();
@@ -43,6 +44,7 @@ public class WebSocketController {
         } 
         PlayerEntity newPlayer = new PlayerEntity(name, bet, suit);
         player.addPlayer(newPlayer);
+        System.out.println("Player added");
         
         return newPlayer;
     }
