@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Page 1</title>
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/addPlayer.css}"/> 
   </head>
   <body>
-    <h1>Welcome to Page 1</h1>
-    <form id="addPlayer">
-        <label for="username">Name:</label>
-        <input type="text" name="username">
+    <div class="contact-us">
+      <form id="addPlayer">
+        <input placeholder="Name" type="text" name="username">
+        
+        <input placeholder="Bet" type="number" name="bet">
 
-        <label for="horse">Horse:</label>
-        <select id="horseId" name="list">
-            <option value="CLUBS">CLUBS</option>
-            <option value="SPADES">SPADES</option>
-            <option value="DIAMONDS">DIAMONDS</option>
-            <option value="HEARTS">HEARTS</option>
-          </select>
-        
-        <label for="bet">Bet:</label>
-        <input type="number" name="bet">
-        
+        <div class='pets-weight'>
+          <div class='radio-container'>
+            <input checked='' id='CLUBS' name='horse' type='radio' value='CLUBS'>
+            <label for='CLUBS'>Clubs</label>
+            <input id='SPADES' name='horse' type='radio' value='SPADES'>
+            <label for='SPADES'>Spades</label>
+            <input id='HEARTS' name='horse' type='radio' value='HEARTS'>
+            <label for='HEARTS'>Hearts</label>
+            <input id='DIAMONDS' name='horse' type='radio' value='DIAMONDS'>
+            <label for='DIAMONDS'>Diamonds</label>
+          </div>
+        </div>
         <button type="submit">Submit</button>
     </form>
 
+    
+    </div>
     <script th:src="@{/js/addPlayer.js}"></script>
-  
   </body>
 </html>
