@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>    
+    <link rel="stylesheet" th:href="@{/css/style.css}"/> 
+    <link rel="stylesheet" th:href="@{/css/homeStyle.css}"/>   
   </head>
   <body >
-    <h1 class="header">Horse Race</h1>
     <body>
+        <div class="header">
+            <img class="title-image" src="images/title.png" alt="My Image">
+        </div>
         <div class="grid-container">
             <div id="deckItem" style="grid-column: 1 / 2; grid-row: 1 / 2; height: 100%; width: 100%; text-align: center;">
                 <img id="deck" src="images/back.png" class="game-cards">
@@ -47,9 +50,25 @@
                 Winner
             </div>
           </div>
+          <div class="lists">
+            <!-- This calls /getPlayers and adds them to the list -->
+           <ul id="HEARTS" class="list">
+              <img class="horses-images" src="images/HEARTS.png" alt="My Image">
+           </ul>
+           <ul id="CLUBS" class="list">
+              <img class="horses-images" src="images/CLUBS.png" alt="My Image">
+           </ul>
+           <ul id="DIAMONDS" class="list">
+            <img class="horses-images" src="images/DIAMONDS.png" alt="My Image">
+           </ul>
+           <ul id="SPADES" class="list">
+            <img class="horses-images" src="images/SPADES.png" alt="My Image">
+           </ul>
+        </div>
       </body>
 
       <script th:src="@{/js/game.js}"></script>
+      <script th:src="@{/js/getPlayer.js}"></script>
 
   </body>
 </html>

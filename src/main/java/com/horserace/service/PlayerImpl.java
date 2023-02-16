@@ -1,9 +1,13 @@
 package com.horserace.service;
 
 import java.util.HashMap;
+
+import org.springframework.stereotype.Component;
+
 import com.horserace.persistence.model.PlayerEntity;
 
-public class PlayerImpl implements Player {
+@Component
+public class PlayerImpl {
 
     private HashMap<Integer, PlayerEntity> players = new HashMap<>();
 
@@ -14,7 +18,7 @@ public class PlayerImpl implements Player {
 
     }
 
-    public void addPlayer(PlayerEntity player){
+    public synchronized void addPlayer(PlayerEntity player){
         if(players.isEmpty()) {
             players.put(index, player);
         } else {
