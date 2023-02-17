@@ -9,17 +9,29 @@ const flipDeck = (image) => {
     });
 }
 
-//Move horse
+/**
+ * This method will find the location of a card
+ * in the grid and will either update it by 1 or -1
+ * thus simulating a card moving
+ * @param {[String]} id [finding the correct card to move]
+ * @param {[Integer]} mover [1 or -1 to move card forward or backward] 
+ * @returns the new poistion of a card
+ */
 const moveHorse = (id, mover) => {
     return new Promise((resolve) => {
+        //Get the location of the card
         const gridItem = document.querySelector(id);
         const styles = window.getComputedStyle(gridItem);
         const gridColumn = styles.getPropertyValue('grid-column');
+        //Slipt the values [ex. grid-column: 1 / 2] 
         var gridColumnStartLine = gridColumn.split(' / ')[0];
         const gridColumnEndLine = gridColumn.split(' / ')[1];
+        //Update the values
         let newStart = parseInt(gridColumnStartLine) + mover;
         var newEnd = parseInt(gridColumnEndLine) + mover;
+        //Combine them back into correct format
         var newPos = `${newStart} / ${newEnd}`;
+        //Update the grid position
         gridItem.style.gridColumn = `${newPos}`;
         resolve();
     });
