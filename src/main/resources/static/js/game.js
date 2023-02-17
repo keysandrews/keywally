@@ -71,6 +71,10 @@ async function playGame() {
     try{
         //Get Game instructions from backend
         const instructions = await getGameInstructions();
+
+        //Suit to display on pop up
+        var imageSuit;
+
         //For each instruction
         for(const instruction of instructions){
             //Build Instruction Object
@@ -97,64 +101,67 @@ async function playGame() {
                     await moveHorse(id, 1);
                 }        
             }
+            imageSuit = suit;
         }
-        restartGame();
+        restartGame(imageSuit);
     } catch(error){
         console.error(error);
     }    
 }
 
-playGame();
-
-
-
-
-////////
-async function restartGame(){
-    console.log("Hello")
-    // TODO: Add code to determine winners
+async function restartGame(imageSuit) {
+    console.log("Hello");
+  
     // Create the modal
     const modal = document.createElement('div');
     modal.classList.add('modal');
-
+  
     // Create the modal content
     const content = document.createElement('div');
     content.classList.add('modal-content');
-
-    // Create the winners element
-    const winners = document.createElement('p');
-    winners.textContent = 'Winners: TODO: Add winner names here'; // TODO: Replace with actual winners
-
+  
+    // Create the header with the image
+    const header = document.createElement('div');
+    header.classList.add('modal-header');
+    const image = document.createElement('img');
+    image.src = `../images/${imageSuit}.png`;
+    header.appendChild(image);
+    const winnerText = document.createElement('div');
+    winnerText.textContent = 'Winner';
+    winnerText.classList.add('winner-text');
+    header.appendChild(winnerText);
+    content.appendChild(header);
+  
     // Create the buttons
     const restartBtn = document.createElement('button');
     restartBtn.textContent = 'Restart Game';
     restartBtn.addEventListener('click', () => {
         modal.style.display = 'none';
+        // Call the function again to restart the game
         location.reload();
     });
-
+  
     const lobbyBtn = document.createElement('button');
     lobbyBtn.textContent = 'Return to Main Lobby';
     lobbyBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        clearPlayerList();
+      modal.style.display = 'none';
+      clearPlayerList();
     });
-
+  
     // Add the elements to the modal content
-    content.appendChild(winners);
     content.appendChild(restartBtn);
     content.appendChild(lobbyBtn);
-
+  
     // Add the modal content to the modal
     modal.appendChild(content);
-
+  
     // Add the modal to the document
     document.body.appendChild(modal);
-
+  
     // Display the modal
     modal.style.display = 'block';
-}
-
+  }
+  
 async function clearPlayerList(){
     try {
         console.log("clear list");
@@ -166,5 +173,8 @@ async function clearPlayerList(){
         console.error(error);
     }
 }
+
+
+playGame();
 
 
