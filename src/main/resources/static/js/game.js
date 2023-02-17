@@ -98,9 +98,73 @@ async function playGame() {
                 }        
             }
         }
+        restartGame();
     } catch(error){
         console.error(error);
     }    
 }
 
 playGame();
+
+
+
+
+////////
+async function restartGame(){
+    console.log("Hello")
+    // TODO: Add code to determine winners
+    // Create the modal
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    // Create the modal content
+    const content = document.createElement('div');
+    content.classList.add('modal-content');
+
+    // Create the winners element
+    const winners = document.createElement('p');
+    winners.textContent = 'Winners: TODO: Add winner names here'; // TODO: Replace with actual winners
+
+    // Create the buttons
+    const restartBtn = document.createElement('button');
+    restartBtn.textContent = 'Restart Game';
+    restartBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        location.reload();
+    });
+
+    const lobbyBtn = document.createElement('button');
+    lobbyBtn.textContent = 'Return to Main Lobby';
+    lobbyBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        clearPlayerList();
+    });
+
+    // Add the elements to the modal content
+    content.appendChild(winners);
+    content.appendChild(restartBtn);
+    content.appendChild(lobbyBtn);
+
+    // Add the modal content to the modal
+    modal.appendChild(content);
+
+    // Add the modal to the document
+    document.body.appendChild(modal);
+
+    // Display the modal
+    modal.style.display = 'block';
+}
+
+async function clearPlayerList(){
+    try {
+        console.log("clear list");
+        fetch("/clearPlayerList").then(response => {
+            console.log(response)
+            window.location.href = '/';
+        })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+

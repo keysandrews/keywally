@@ -44,5 +44,11 @@ public class PlayerImpl {
             }
         }
     }
+
+    public void resetPlayers(){
+        System.out.println("Clearing list");
+        players.clear();
+        index = 0;
+    }
     
 }
