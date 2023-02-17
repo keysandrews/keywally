@@ -1,5 +1,6 @@
 const image = document.getElementById("deck");
 
+//Flip the main deck
 const flipDeck = (image) => {
     return new Promise((resolve) => {
         image.addEventListener("click", () => {
@@ -8,6 +9,7 @@ const flipDeck = (image) => {
     });
 }
 
+//Move horse
 const moveHorse = (id, mover) => {
     return new Promise((resolve) => {
         const gridItem = document.querySelector(id);
@@ -31,6 +33,7 @@ const flipSideDeck = (image, rank, suit) => {
     });
 }
 
+//Call the API to get insturctions
 async function getGameInstructions() {
     try {
         const response = await fetch("/gameInstructions");
@@ -41,42 +44,51 @@ async function getGameInstructions() {
     }
 }
 
+//Flip image
 async function onImageClick(rank, suit, image) {
     image.src = `images/cards/${rank}_of_${suit}.png`; 
 } 
 
+/**
+ * Method will call API to get the list 
+ * of instructions for a given game and 
+ * will display the cooresponding steps on 
+ * the screen
+ */
 async function playGame() {
-    const data = await getGameInstructions();
-    for(let i = 0; i < data.length; i++) {
-        let rank = data[i].card.rank;
-        let suit = data[i].card.suit;
-        let pos = data[i].position;
-        let type = data[i].type;
-        let action = data[i].action;      
-        if(action == "FLIP"){
-            if(type == "DECK") {
-                await flipDeck(image).then(() => onImageClick(rank, suit, image));
-            } else {
-                const image = document.getElementById((type + pos));
-                mover = -1;
-                let id = `#ACE${suit}`;      
-                await flipSideDeck(image, rank, suit);
-                setTimeout(function() {
+    try{
+        //Get Game instructions from backend
+        const instructions = await getGameInstructions();
+        //For each instruction
+        for(const instruction of instructions){
+            //Build Instruction Object
+            const { card, position, type, action, forward } = instruction;
+            const rank = card.rank;
+            const suit = card.suit;
+            //Id to move the cooresponding horse card
+            const id = `#${rank}${suit}`;
 
-                }, 1000);
-            }         
-        } else {
-            let forward = data[i].forward;
-            let id = `#${rank}${suit}`;
-            if (forward == false) {
-                setTimeout(function() {
-                    moveHorse(id, -1);
-                }, 500);
+            if(action == "FLIP"){
+                if(type == "DECK") {
+                    //Flip the Deck Card
+                    await flipDeck(image).then(() => onImageClick(rank, suit, image));
+                } else {
+                    //Flip the Side Deck
+                    const image = document.getElementById((`${type}${position}`));    
+                    await flipSideDeck(image, rank, suit);
+                    setTimeout(function() {}, 1000);
+                }         
             } else {
-                await moveHorse(id, 1);
-            }        
+                if (forward == false) {
+                    setTimeout(() => moveHorse(id, -1), 500);
+                } else {
+                    await moveHorse(id, 1);
+                }        
+            }
         }
-    }       
+    } catch(error){
+        console.error(error);
+    }    
 }
 
 playGame();
