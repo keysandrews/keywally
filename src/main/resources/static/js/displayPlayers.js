@@ -33,6 +33,10 @@ async function displayPlayer(playerInfo){
     playerCount++;
 }
 
+/**
+ * Update the player count and call displayPlayer
+ * @param {[String]} playerInfo [body of message]
+ */
 async function getPlayerCount(playerInfo) {
     await displayPlayer(playerInfo);
     const updatePlayerCount = document.getElementById("player-count");
