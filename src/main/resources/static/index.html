@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/homeStyle.css"/> 
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
@@ -12,9 +13,12 @@
         </div>
         <div class="image-section">
             <p id="player-count" class="player-count">Number of players: 0</p>
+            <img class="qr-code" src="images/qrcode.png" alt="My Image"> 
+            <img class="image" onclick="location.href='/game'" src="images/StartGame.png" alt="My Image"> 
+            <!-- <p id="player-count" class="player-count">Number of players: 0</p>
             <img class="image" src="images/qrcode.png" alt="My Image"> 
             <button id="startGame" onclick="location.href='/game'" class="start-game-button">Start Game</button>
-            <button class="fake-game-button"></button>
+            <button class="fake-game-button"></button> -->
         </div>
         <div class="lists">
             <!-- This calls /getPlayers and adds them to the list -->
